@@ -1,0 +1,18 @@
+class Solution {
+public:
+    int countStudents(vector<int>& students, vector<int>& sandwiches) {
+        int n = students.size(), cnt = students.size();
+        for (int i = 0, j = 0; i < students.size(); i ++, j ++) {
+            if (students[i] == sandwiches[j]) {
+                cnt = -- n;
+            }
+            else {
+                cnt --;
+                if (cnt == 0) return n;
+                students.push_back(students[i]);
+                j --;
+            }
+        }
+        return 0;
+    }
+};

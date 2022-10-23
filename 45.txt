@@ -1,0 +1,22 @@
+class Solution {
+public:
+    int MaxLenth = 0, cnt = 1;
+    int jump(vector<int>& nums) {
+        int n = nums.size(), begin = 1, end = nums[0] + 1;
+        MaxLenth = nums[0];
+        if (n == 1) return 0;
+        while (MaxLenth + 1 < n) {
+            for (int j = begin; j < end && j < n; j ++) {
+                // cout << j << "  " << nums[j] << "  " << begin << "  " << end << endl;
+                if (j + nums[j] > MaxLenth) {
+                    MaxLenth = j + nums[j];
+                }
+            }
+            // cout << "  " << begin << "  " << end << "  " << MaxLenth << endl;
+            begin = end;
+            end = MaxLenth + 1;
+            cnt ++;
+        }
+        return cnt;
+    }
+};

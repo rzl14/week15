@@ -1,0 +1,20 @@
+class Solution {
+public:
+    int MaxSchedu[50005];
+    pair<int, pair<int, int>> works[50005];
+    int jobScheduling(vector<int>& startTime, vector<int>& endTime, vector<int>& profit) {
+        int n = startTime.size();
+        for (int i = 0; i < n; i ++) {
+            works[i + 1].first = endTime[i], works[i + 1].second.first = startTime[i], works[i + 1].second.second = profit[i];
+        }
+        sort(works, works + n + 1);
+        MaxSchedu[0] = 0;
+        for (int i = 1; i <= n; i ++) {
+            // cout << i << "  " << works[i].first << "  " << works[i].second.first << "  " << works[i].second.second << endl;
+            int j = i;
+            while (j >= 0 && works[j].first > works[i].second.first) j --;
+            MaxSchedu[i] = max(MaxSchedu[j] + works[i].second.second, MaxSchedu[i - 1]);
+        }
+        return MaxSchedu[n];
+    }
+};
